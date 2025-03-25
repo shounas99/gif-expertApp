@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { AddCategory } from "./components/AddCategory"
+import { GifGrid } from "./components/GifGrid"
 
 export const GifExpertApp = () => {
 
-  const [ categories, setCategories ] = useState(['Jonas Brothers', 'Imagine Dragons'])
+  const [ categories, setCategories ] = useState(['Universe'])
 
   const onAddCategory = ( newCategory ) => {
     if( categories.includes(newCategory) ) return 
@@ -15,23 +16,20 @@ export const GifExpertApp = () => {
 
   return (
     <>
-    {/* title */}
-        <h1>GifExpertApp</h1>
-    {/* input */}
-    <AddCategory 
-      onNewCategory = { (event) => onAddCategory(event) }
-    />
-    {/* gif list */}
+      <h1>GifExpertApp</h1>
 
-    <ol>
+      <AddCategory 
+        onNewCategory = { (event) => onAddCategory(event) }
+      />
+
       { 
-        categories.map( (cat) => {
-          return <li key={ cat }>{ cat }</li>
-        }) 
+        categories.map( ( category ) => (
+          <GifGrid 
+            key={ category } 
+            category={ category }
+          />
+        )) 
       }
-      {/* <li>ABC</li> */}
-    </ol>
-        {/* gif item */}
     </>
   )
 }
