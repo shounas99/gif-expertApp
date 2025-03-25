@@ -1,22 +1,12 @@
-import { useEffect, useState } from "react"
-import { getGifs } from "../helpers/getGifs"
 import { GifItem } from "./GifItem"
+import { useFetchGifs } from "../hooks/useFetchGifs";
 
 export const GifGrid = ({ category }) => {
+    //new customHook by me - principio DRY - Don't Repeat Yourself
+    const { images, isLoading } = useFetchGifs( category );
 
-    //estado local - para mantener las imagenes
-    const [images, setImages] = useState([])
-
-    const getImages = async() => {
-        const newImages = await getGifs( category )
-        setImages( newImages )
-    }
-
-    useEffect(() => {
-        getImages()
-        // getGifs(category)
-        //     .then( newImages => setImages(newImages)); // se utiliza the porque no puedo agregar un async en un hook, porque estas son funciones NO promesas
-    }, [])
+    console.log('fetch gifs -', {isLoading});
+    
 
     return (
         <>
